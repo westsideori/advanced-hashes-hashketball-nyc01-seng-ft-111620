@@ -1,3 +1,4 @@
+require "pry"
 # Write your code below game_hash
 def game_hash
   {
@@ -126,4 +127,95 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(bball_player)
+  game_hash
+  points_scored = nil
+  game_hash.each do |team_status, team_info|
+    team_info[:players].each do |player|
+      if player[:player_name] == bball_player
+        points_scored = player[:points]
+      end
+    end
+  end
+  points_scored
+end    
+    
+def shoe_size(bball_player)
+  game_hash
+  player_shoe = nil
+  game_hash.each do |team_status, team_info|
+    team_info[:players].each do |player|
+      if player[:player_name] == bball_player
+        player_shoe = player[:shoe]
+      end
+    end
+  end
+  player_shoe
+end
+    
+
+def team_colors(team)
+  game_hash
+  team_colors = nil
+  game_hash.each do |team_status, team_info|
+    if team_info[:team_name] == team
+      team_colors = game_hash[team_status][:colors]
+    end
+  end
+  team_colors
+end
+    
+
+def team_names
+  game_hash
+  teams = []
+  teams << game_hash[:home][:team_name]
+  teams << game_hash[:away][:team_name]
+  teams
+end
+
+def player_numbers(team)
+  game_hash
+  player_numbers = []
+  game_hash.each do |team_status, team_info|
+    if team_info[:team_name] == team
+      team_info[:players].each do |player|
+        player_numbers << player[:number]
+      end
+    end
+  end
+  player_numbers
+end
+    
+def player_stats(bball_player)
+  game_hash
+  stat_hash = {}
+  game_hash.each do |team_status, team_info|
+    team_info[:players].each do |player|
+      if player[:player_name] == bball_player
+        stat_hash = player
+      end
+    end
+  end
+  stat_hash
+end
+    
+def big_shoe_rebounds
+  game_hash
+  shoe_array = []
+  big_shoe_player_boards = nil
+  game_hash.each do |team_status, team_info|
+    team_info[:players].each do |player|
+      shoe_array << player[:shoe]
+    end
+  end
+  biggest_shoe = shoe_array.max
+  game_hash.each do |team_status, team_info|
+    team_info[:players].each do |player|
+      if player[:shoe] == biggest_shoe
+        big_shoe_player_boards = player[:rebounds]
+      end
+    end
+  end
+  big_shoe_player_boards
+end
